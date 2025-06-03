@@ -1,0 +1,6 @@
+# Migration Note
+# All main application files from the original project have been moved here.
+# - main.py, app.py, check_duplicates.py, init_db.py, setup.py, task_details.py
+# - data/ and backups/ folders
+# - test_app.py, venv, and build scripts were NOT moved
+# Please update app.py to use your main logic as the BeeWare entry point. 

@@ -1,0 +1,158 @@
+### Performance Tracker .cursorrules
+
+## Local Development Protocol
+**🚨 Development is performed on the local PC for code editing and testing, but all Android builds MUST be performed using WSL (Windows Subsystem for Linux) with Ubuntu! 🚨**
+
+### Local Environment Structure
+- **Project Path:** Current workspace directory (code editing on Windows, building on WSL)
+- **Development Environment:** Local PC with Python (Windows for code, WSL for Android build)
+- **Target Platform:** Android mobile devices
+- **Build System:** Buildozer for Android packaging (in WSL/Ubuntu)
+
+### WSL Build Protocol
+- **All Android builds must be performed in WSL (Ubuntu).**
+- **Windows is only for code editing, not for Android builds.**
+- **You can run pip install, python, and other development commands in WSL.**
+- **You can create and manage virtual environments in WSL.**
+- **You can build Android APKs using buildozer in WSL.**
+- **Exception:** File deletion operations require explicit user confirmation
+
+### WSL Command Format Examples:
+```bash
+# Open Ubuntu (WSL) terminal:
+wsl
+
+# Navigate to your project directory (mounted Windows drive, e.g. /mnt/c/Users/Igors/Desktop/PreformanceChecker):
+cd /mnt/c/Users/Igors/Desktop/PreformanceChecker
+
+# Create and activate virtual environment:
+python3 -m venv venv
+source venv/bin/activate
+
+# Install dependencies:
+pip install -r requirements.txt
+
+# Install buildozer:
+pip install buildozer
+
+# Build Android APK:
+buildozer android debug
+```
+
+### Development Workflow
+1. **Local Development:**
+   - Develop and test on PC first (Windows)
+   - Use virtual environment (in WSL for Android build)
+   - Test UI and functionality locally
+   - Make sure all features work
+
+2. **Android Building (in WSL):**
+   - Build APK using buildozer in WSL
+   - Test on Android device
+   - Fix any device-specific issues
+   - Create new build if needed
+
+3. **Data Management:**
+   - Regular database backups
+   - Test data restoration
+   - Verify data integrity
+
+## Documentation Structure
+1. `.cursor/docs/` - Core documentation
+   - `project-overview.md` - Project goals and summary
+   - `setup-guide.md` - Environment and dependency setup
+   - `development-workflow.md` - Workflow and best practices
+   - `android-build-guide.md` - Android build process (update for WSL)
+   - `database-management.md` - Database operations and backup
+
+2. `.cursor/doclogs/` - Development logs
+   - `UpdateLog.md` - Update tracking
+   - `ErrorLog.md` - Errors and solutions
+   - `BuildLog.md` - Build process logs
+
+## Documentation Protocol
+- Before any code generation or analysis, consult:
+  - `.cursor/docs/project-overview.md`
+  - `.cursor/docs/setup-guide.md`
+  - `.cursor/docs/development-workflow.md`
+
+- **After any major action, document findings in appropriate `docs/` file(s)**
+- **Create new documentation files for new features**
+- **Update documentation after significant changes**
+
+## Mobile Development Protocol
+- All UI components must be designed for mobile first
+- Test on different screen sizes
+- Ensure touch-friendly interface
+- Optimize for offline use
+- Implement proper data persistence
+- Handle device-specific features
+
+## Android Build Protocol (WSL)
+- Use buildozer for Android packaging (in WSL)
+- Test APK on multiple Android versions
+- Handle permissions properly
+- Optimize app size
+- Ensure proper data storage
+- Test offline functionality
+
+## Data Management Protocol
+- Regular database backups
+- Safe storage of backup files
+- Data restoration testing
+- Version control for database schema
+- Data integrity checks
+
+## Testing Protocol
+- Test all features locally first
+- Test on Android device after build
+- Verify offline functionality
+- Test data persistence
+- Check UI on different screen sizes
+- Verify backup/restore functionality
+
+## Performance Optimization Protocol
+- Optimize database operations
+- Minimize memory usage
+- Efficient UI updates
+- Battery usage optimization
+- Storage space management
+
+## Security Protocol
+- Secure local data storage
+- Safe backup procedures
+- Data encryption if needed
+- Permission management
+- Input validation
+
+## Database Handling on PC and Android
+- On first run, the app checks for the database file and creates it if missing (both PC and Android).
+- If the database schema changes (e.g., new columns), the app will delete the old database and create a new one (current behavior; data loss will occur).
+- Users should be warned about data loss on schema changes.
+- Users can back up the database file manually (PC: `data/performance.db`, Android: app's private storage).
+- Future improvement: implement schema migration to preserve data on updates.
+
+## Mobile/Android Specifics
+- The app uses SQLite for local storage on Android, just like on PC.
+- On Android, the database is stored in the app's private directory (not directly accessible without file manager or ADB).
+- On app update with schema change, the same deletion/recreation logic applies unless migration is implemented.
+- Users should be provided with backup/restore instructions for their data.
+
+## Task Timing and Performance Protocol
+- Each task record is created by the user entering start time and finish time manually (HH:MM format).
+- Target duration (minutes) is also entered manually.
+- The app calculates actual duration and performance percentage based on these inputs.
+- No automatic time recording or Start/Finish buttons are used.
+- All timing and performance data is stored per record in the database.
+- UI must provide input fields for start time, finish time, and target duration for each record.
+
+## Home Page and Record Entry Protocol
+- The home page must display three summary cards/windows: Daily, Weekly, and Monthly performance totals.
+- Each card shows total/average performance and a 'View Details' button.
+- There must be a prominent 'Add Today's Record' button.
+- When adding a record, the task name is auto-generated as 'Mon03.06' (weekday+date, read from device/phone).
+- The date field is auto-filled and not editable.
+- All UI elements must be large, touch-friendly, and logically grouped for mobile use.
+- The workflow must be easy and fast for daily use on a phone.
+
+## END OF PERFORMANCE TRACKER RULES AND PROTOCOLS
